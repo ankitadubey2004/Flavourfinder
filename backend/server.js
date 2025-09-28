@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors'); // <--- CORS import
+const cors = require('cors'); 
 const connectDB = require('./config/db');
 
 // --- Configuration Setup ---
@@ -16,10 +16,8 @@ const app = express();
 // --- Middleware ---
 
 // 1. CORS Middleware: Allows the frontend (e.g., React on port 5173) to access the backend (port 5000)
-// Development में, आप सभी origins (*) को अनुमति दे सकते हैं, या सिर्फ अपने frontend URL को।
-// Production के लिए, सिर्फ अपने domain को allow करें।
 app.use(cors({
-    origin: 'http://localhost:5173', // Replace with your actual React/Vite dev port
+    origin: 'http://localhost:5173', 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }));
@@ -37,9 +35,11 @@ app.get('/', (req, res) => {
 // Authentication Routes (Signup and Login)
 app.use('/api/auth', require('./routes/authRoutes'));
 
-// TODO: Future Routes for Vendor Management and Customer Discovery
-// app.use('/api/vendors', require('./routes/vendorRoutes')); 
-// app.use('/api/customers', require('./routes/customerRoutes'));
+// Vendor Management Routes 
+app.use('/api/vendors', require('./routes/vendorRoutes')); 
+
+// Customer Discovery Routes (Uncommented for Phase 3)
+app.use('/api/customers', require('./routes/customerRoutes')); // <--- NOW ACTIVE
 
 // --- Server Start ---
 

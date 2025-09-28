@@ -1,15 +1,33 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Import the page components we are about to create
+import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
+import VendorSignup from './pages/VendorSignup.jsx';
+import CustomerDashboard from './pages/CustomerDashboard.jsx';
+import VendorDashboard from './pages/VendorDashboard.jsx';
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-blue-50">
-      <h1 className="text-4xl font-bold text-blue-700 mb-4">
-        Tailwind is working!
-      </h1>
-      <button className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-        Click Me
-      </button>
-    </div>
+    <Router>
+      <div className="App">
+        {/* We'll add a navigation bar component here later */}
+        
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup/vendor" element={<VendorSignup />} />
+
+          {/* Protected Routes (We'll implement the actual protection logic later) */}
+          <Route path="/customer/dashboard" element={<CustomerDashboard />} />
+          <Route path="/vendor/dashboard" element={<VendorDashboard />} />
+          
+          {/* Fallback route for 404 Not Found (Optional) */}
+          {/* <Route path="*" element={<h1>404 Not Found</h1>} /> */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
